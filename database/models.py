@@ -5,7 +5,6 @@ class Department(models.Model):
     """Department Model"""
     department_id = models.SmallAutoField(primary_key=True)
     department_name = models.CharField(verbose_name='Название', max_length=50)
-    department_state_count = models.SmallIntegerField(verbose_name='Количество работников')
 
     def __str__(self):
         return f"{self.department_name.capitalize()}" 
@@ -19,7 +18,6 @@ class Specialization(models.Model):
     """Specialization Model"""
     specialization_id = models.SmallAutoField(primary_key=True)
     specialization_name = models.CharField(verbose_name='Название', max_length=50)
-    specialization_state_count = models.SmallIntegerField(verbose_name='Количество работников')
 
     def __str__(self):
         return f"{self.specialization_name.capitalize()}" 
@@ -59,11 +57,14 @@ class WorkTime(models.Model):
 class Chart(models.Model):
     """Chart Model"""
     chart_id = models.SmallAutoField(primary_key=True)
-    chart_day_id = models.ForeignKey('Day', on_delete=models.CASCADE)
-    chart_work_time_id = models.ForeignKey('WorkTime', on_delete=models.CASCADE)
+    chart_day_id = models.ForeignKey('Day', on_delete=models.CASCADE, 
+                                     verbose_name='День недели')
+    chart_work_time_id = models.ForeignKey('WorkTime', on_delete=models.CASCADE,
+                                           verbose_name='Время работы')
 
     def __str__(self):
-        pass
+        return f"{self.chart_day_id.day_name}: {self.chart_work_time_id.work_time_start}" \
+               f" - {self.chart_work_time_id.work_time_end}"
 
     class Meta:
         db_table = 'chart'
@@ -97,12 +98,21 @@ class Doctor(models.Model):
 class Schedule(models.Model):
     """Schdeule Model"""
     schedule_id = models.SmallAutoField(primary_key=True)
-    schedule_doctor_id = models.ForeignKey('Doctor', on_delete=models.CASCADE)
-    schedule_chart_id = models.ForeignKey('Chart', on_delete=models.CASCADE)
+    schedule_doctor_id = models.ForeignKey('Doctor', on_delete=models.CASCADE,
+                                           verbose_name='Врач')
+    schedule_chart_id = models.ForeignKey('Chart', on_delete=models.CASCADE,
+                                          verbose_name='Расписание')
 
     def __str__(self):
         return f"График №{self.schedule_id} - {self.schedule_doctor_id.doctor_last_name}" \
-                f" {self.schedule_doctor_id.doctor_first_name}"
+                f" {self.schedule_doctor_id.doctor_first_name} |" \
+                f" {self.schedule_chart_id.chart_work_time_id.work_time_start} -" \
+                f" {self.schedule_chart_id.chart_work_time_id.work_time_end}"
+
+    class Meta:
+        db_table = 'schedule'
+        verbose_name = 'Расписание работы врачей'
+        verbose_name_plural = 'Расписания работы врачей'
 
 class Recipe(models.Model):
     """Recipe Model"""
@@ -121,7 +131,8 @@ class Desease(models.Model):
     """Desease Model"""
     desease_id = models.SmallAutoField(primary_key=True)
     desease_name = models.CharField(max_length=150, verbose_name='Болезнь')
-    desease_recipe = models.ForeignKey('Recipe', on_delete=models.RESTRICT)
+    desease_recipe = models.ForeignKey('Recipe', on_delete=models.RESTRICT,
+                                       null=True, blank=True, verbose_name='Рецепт')
 
     def __str__(self):
         return f"{self.desease_name}"
@@ -138,7 +149,7 @@ class MedicalHistory(models.Model):
     medical_history_end = models.DateField(verbose_name='Дата выздоровления',
                                                    blank=True, null=True)
     medical_history_desease_id = models.ForeignKey('Desease', on_delete=models.CASCADE,
-                                                   verbose_name='Рецепт')
+                                                   verbose_name='Болезнь')
 
     def __str__(self):
         pass
@@ -156,10 +167,11 @@ class Patient(models.Model):
     patient_second_name = models.CharField(verbose_name='Отчество', max_length=30,
                                            blank=True, null=True)
     patient_age = models.SmallIntegerField(verbose_name='Возраст')
-    patient_medical_history = models.ForeignKey('MedicalHistory', on_delete=models.CASCADE)
+    patient_medical_history = models.ForeignKey('MedicalHistory', on_delete=models.CASCADE,
+                                                null=True, blank=True, verbose_name='История болезни')
 
     def __str__(self):
-        pass
+        return f"Пациент {self.patient_last_name} {self.patient_last_name}"
 
     class Meta:
         db_table = 'patient'
@@ -170,8 +182,18 @@ class Patient(models.Model):
 class Visit(models.Model):
     """Visit Model"""
     visit_id = models.SmallAutoField(primary_key=True)
-    visit_doctor_id = models.ForeignKey('Doctor', on_delete=models.CASCADE)
-    visit_patient_id = models.ForeignKey('Patient', on_delete=models.CASCADE)
+    visit_doctor_id = models.ForeignKey('Doctor', on_delete=models.CASCADE, 
+                                        verbose_name='Врач')
+    visit_patient_id = models.ForeignKey('Patient', on_delete=models.CASCADE, 
+                                         verbose_name='Пациент')
     visit_datetime = models.DateTimeField()
+
+    def __str__(self):
+        return f"Посещение {self.visit_id}"
+
+    class Meta:
+        db_table = 'visit'
+        verbose_name = 'Посещение'
+        verbose_name_plural = 'Посещения'
 
 
