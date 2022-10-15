@@ -1,0 +1,12 @@
+{% extends 'database/base.html' %}
+
+{% block content %}
+
+{% for patient in patients %}
+{{ patient.patient_first_name }}
+{{ patient.patient_last_name }}
+<a href="{{ patient.get_absolute_url }}">Подробнее</a>
+<br>
+{% endfor %}
+
+{% endblock%}

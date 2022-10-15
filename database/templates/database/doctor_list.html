@@ -1,0 +1,12 @@
+{% extends 'database/base.html' %}
+
+{% block content %}
+   {% for doctor in doctors %} 
+    {{ doctor.doctor_first_name }}
+    {{ doctor.doctor_last_name }}
+    {{ doctor.doctor_specialization_id.specialization_name }}
+    {{ doctor.doctor_department_id.department_name }}
+    <a href="{{ doctor.get_absolute_url }}">Подробнее</a>
+    <br>
+   {% endfor %}
+{% endblock %}
