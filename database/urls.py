@@ -1,7 +1,13 @@
-from django.contrib import admin
-from django.urls import path, include
-from .views import home_page
+from django.urls import path
+from .views import DoctorDetailView, \
+                   DoctorsListView, \
+                   PatientDetailView, \
+                   PatientsListView
 
 urlpatterns = [
-        path('', home_page)
+        path('doctors_list/', DoctorsListView.as_view(), name='doctors_list'),
+        path('patients_list/', PatientsListView.as_view(), name='patients_list'),
+        path('patient/<int:pk>', PatientDetailView.as_view(), name='patient'),
+        path('doctor/<int:pk>', DoctorDetailView.as_view(), name='doctor'),
+
 ]
