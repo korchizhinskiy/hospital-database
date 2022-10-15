@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Department(models.Model):
@@ -89,6 +90,9 @@ class Doctor(models.Model):
         return f"Врач-{self.doctor_specialization_id.specialization_name.lower()}" \
                f" {self.doctor_first_name.capitalize()} {self.doctor_last_name.capitalize()}"
 
+    def get_absolute_url(self):
+        return reverse('doctor', kwargs={'pk': self.pk})
+
     class Meta:
         db_table = 'doctor'
         unique_together = ['doctor_first_name', 'doctor_last_name', 'doctor_second_name']
@@ -172,6 +176,9 @@ class Patient(models.Model):
 
     def __str__(self):
         return f"Пациент {self.patient_last_name} {self.patient_last_name}"
+
+    def get_absolute_url(self):
+        return reverse('patient', kwargs={'pk': self.pk})
 
     class Meta:
         db_table = 'patient'
