@@ -1,7 +1,7 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
-from database.utils import GetDoctorDataMixin
+from database.utils import GetDoctorDataMixin, GetPatientDataMixin
 
 from .models import Doctor, Patient
 
@@ -31,12 +31,13 @@ class DoctorDetailView(GetDoctorDataMixin, DetailView):
     def get_queryset(self):
         return Doctor.objects.filter(
                 pk=self.kwargs['pk']
-                ).select_related('doctor_specialization_id').first()
+                ).select_related('doctor_specialization_id')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         chart = self.get_doctor_chart(doctor_id=self.kwargs['pk'])
-        return context | chart
+        visit = self.get_doctor_visit(doctor_id=self.kwargs['pk'])
+        return context | chart | visit
 
 
 class PatientsListView(ListView):
@@ -53,8 +54,19 @@ class PatientsListView(ListView):
         return patients
 
 
-class PatientDetailView(DetailView):
+class PatientDetailView(GetPatientDataMixin, DetailView):
     """Patient Detail View"""
     model = Patient
     context_object_name = 'patient'
     template_name = 'database/patient.html'
+
+    def get_queryset(self):
+        return Patient.objects.filter(pk=self.kwargs['pk'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        medical_history = self.get_patient_medical_history(self.kwargs['pk'])
+        visit = self.get_doctor_visit_by_patient(self.kwargs['pk'])
+        return context | medical_history | visit
+
+
