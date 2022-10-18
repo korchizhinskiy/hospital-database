@@ -30,7 +30,8 @@ class GetPatientDataMixin(GetDataMixin):
         """Get patient's medical history"""
         context = kwargs
         medical_history = MedicalHistory.objects.filter(
-                medical_patient_id=patient_id)
+                medical_patient_id=patient_id
+                ).select_related('medical_history_desease_id')
         context['medical_history'] = medical_history
         return context
 
