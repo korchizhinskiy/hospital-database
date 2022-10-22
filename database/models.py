@@ -56,10 +56,7 @@ class Chart(models.Model):
     chart_work_time_end = models.TimeField(verbose_name='Время окончания работы')
 
     def __str__(self):
-        return f"{self.chart_doctor_id.doctor_first_name}" \
-               f" {self.chart_doctor_id.doctor_last_name}" \
-               f" {self.chart_day_id.day_name}: {self.chart_work_time_start}" \
-               f" - {self.chart_work_time_end}"
+        return f"График работы №{self.chart_id}"
 
     class Meta:
         db_table = 'chart'
@@ -83,8 +80,8 @@ class Doctor(models.Model):
     doctor_experience = models.SmallIntegerField(verbose_name='Опыт работы')
 
     def __str__(self):
-        return f"Врач-{self.doctor_specialization_id.specialization_name.lower()}" \
-               f" {self.doctor_first_name.capitalize()} {self.doctor_last_name.capitalize()}"
+        return f"Врач {self.doctor_last_name} {self.doctor_first_name}" \
+               f"{self.doctor_second_name if self.doctor_second_name else ''}"
 
     def get_absolute_url(self):
         return reverse('doctor', kwargs={'pk': self.pk})
@@ -125,10 +122,7 @@ class MedicalHistory(models.Model):
                                                    verbose_name='Болезнь')
 
     def __str__(self):
-        return f"{self.medical_patient_id.patient_first_name}" \
-               f" {self.medical_patient_id.patient_last_name}" \
-               f" {self.medical_history_start} -" \
-               f" {self.medical_history_end if self.medical_history_end else 'н.в.'}"
+        return f"Запись №{self.medical_history_id}"
 
     class Meta:
         db_table = 'medical_history'
@@ -146,7 +140,8 @@ class Patient(models.Model):
     patient_age = models.SmallIntegerField(verbose_name='Возраст')
 
     def __str__(self):
-        return f"Пациент {self.patient_first_name} {self.patient_last_name}"
+        return f"Пациент {self.patient_first_name} {self.patient_last_name}" \
+               f"{self.patient_second_name if self.patient_second_name else ''}"
 
     def get_absolute_url(self):
         return reverse('patient', kwargs={'pk': self.pk})
@@ -172,9 +167,7 @@ class Visit(models.Model):
     visit_datetime = models.DateTimeField()
 
     def __str__(self):
-        return f"Посещение {self.visit_doctor_id.doctor_last_name} -" \
-               f" {self.visit_patient_id.patient_last_name} |" \
-               f" {self.visit_datetime}"
+        return f"Посещение №{self.visit_id}"
 
     class Meta:
         db_table = 'visit'
