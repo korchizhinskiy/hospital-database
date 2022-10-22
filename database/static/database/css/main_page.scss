@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+$oceanic-blue: #6697CA;
+$dark-blue: #45719E;
+$blue: #84D2E6;
+
+$font-nunito: 'Nunito', sans-serif;
+
+.main-offer {
+    margin-top: 200px;
+    display: flex;
+    color: $oceanic-blue;
+    font-family: $font-nunito;
+    font-weight: 400;
+}
+
+.offer {
+    position: relative;
+    flex: 50%;
+
+    &::after {
+        position: absolute;
+        content: '';
+        display: block;
+        width: 360px;
+        height: 360px;
+        background-image: url('../img/cross.svg');
+        opacity: 10%;
+        top: -100px;
+        left: 130px;
+    }
+
+    .offer_text {
+        font-size: 25px;
+        font-weight: 700;
+        width: 55%;
+        
+    }
+
+    .offer_subtext {
+        font-size: 20px;
+        width: 55%;
+        margin-top: 75px;
+        font-weight: 700;
+    }
+    .offer_button-group {
+        margin-top: 150px;
+
+        .offer_button {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
+
+        }
+
+        .visit_button {
+            background: $oceanic-blue;
+            padding: 10px;
+        }
+
+        .call_button {
+            background: $blue;
+            padding: 5px 10px;
+            margin-left: 30px;
+        }
+    }
+}
+.offer_image {
+    flex: 50%;
+    max-width: 600px;
+}
+
+
+// Cards
+
+.suboffer {
+    margin-top: 100px;
+    .suboffer_cards {
+        display: flex;
+        justify-content: space-between;
+
+        .card {
+            background-color: $oceanic-blue;
+            border-radius: 10px;
+            max-width: 255px;
+            padding: 13px 10px;
+            .card_text  {
+                text-align: left;
+                max-width: 231px;
+                color: #fff;
+                font-size: 20px;
+                font-weight: 700;
+                font-family: $font-nunito;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+
+// About
+.about {
+    margin-top: 120px;
+    font-family: $font-nunito;
+
+    .about_title {
+        color: $oceanic-blue;
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 40px;
+   }
+
+   .about_card {
+    display: flex;
+    justify-content: space-between;
+
+    .about_card_text {
+        flex: 50%;
+        max-width: 50%;
+        max-width: 450px;
+        background: rgba(102, 151, 202, 0.5);
+        border-radius: 10px;
+        padding: 17px 35px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+   }
+}
+
+// Advantages
+.advantages {
+    font-family: $font-nunito;
+    padding-bottom: 150px;
+    margin-top: 130px;
+
+    .advantages_title {
+        color: $oceanic-blue;
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 40px;
+    }
+
+    .advantages_card {
+        display: flex;
+        justify-content: space-between;
+
+        .card_texts {
+            max-width: 50%;
+
+            .card_text {
+                font-weight: 400;
+                font-size: 25px;
+                color: $oceanic-blue;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}

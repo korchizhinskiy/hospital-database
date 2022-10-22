@@ -1,12 +1,23 @@
 {% extends 'database/base.html' %}
+{% load static %}
+
+{% block static_link %}
+<link rel="stylesheet" href="{% static 'database/css/doctors_list.css' %}">
+{% endblock %}
 
 {% block content %}
-   {% for doctor in doctors %} 
-    {{ doctor.doctor_first_name }}
-    {{ doctor.doctor_last_name }}
-    {{ doctor.doctor_specialization_id.specialization_name }}
-    {{ doctor.doctor_department_id.department_name }}
-    <a href="{{ doctor.get_absolute_url }}">Подробнее</a>
-    <br>
-   {% endfor %}
+   <section class="doctors">
+      {% for doctor in doctors %} 
+      <div class="patient_name">
+         <a href="{{ doctor.get_absolute_url }}" class="doctor">
+         Врач-{{ doctor.doctor_specialization_id.specialization_name | lower }} | 
+         {{ doctor.doctor_last_name }}
+         {{ doctor.doctor_first_name }}
+         {% if doctor.doctor_second_name %}
+         {{ doctor.doctor_second_name }}
+         {% endif %}
+         </a>
+      </div>
+      {% endfor %}
+    </section>
 {% endblock %}

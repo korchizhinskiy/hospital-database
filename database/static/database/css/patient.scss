@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+$oceanic-blue: #6697CA;
+$dark-blue: #45719E;
+
+$font-nunito: 'Nunito', sans-serif;
+
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 100px;
+    font-weight: 400;
+    font-size: 20px;
+    color: $oceanic-blue;
+    font-family: $font-nunito;
+}
+
+.bold-text-weight {
+    font-weight: 700;
+    font-size: 25px;
+}
+.patient_info {
+    flex: 50%;
+
+    .patient_title {
+        position: relative;
+    }
+
+    .patient_title::after {
+        position: absolute;
+        display: block;
+        content: '';
+        width: 70px;
+        height: 5px;
+        bottom: -10px;
+        left: 0;
+        background: $oceanic-blue;
+        border-radius: 2px;
+    }
+}
+
+.patient_visit {
+    flex: 50%;
+}
+
+.patient_medical_history {
+    margin-top: 100px;
+}
+
+.patient_info > p, .patient_visit > p, .patient_medical_history > p {
+    margin-top: 15px;
+}
+
+.patient_button {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    background-color: $oceanic-blue;
+    padding: 5px 15px;
+    font-size: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+}

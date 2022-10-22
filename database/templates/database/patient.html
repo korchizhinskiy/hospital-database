@@ -1,7 +1,51 @@
 {% extends 'database/base.html' %}
+{% load static %}
+
+{% block static_link %}
+<link rel="stylesheet" href="{% static 'database/css/patient.css' %}">
+{% endblock %}
 
 {% block content %}
-{{ patient.patient_first_name }}
-{{ patient.patient_last_name }}
-<br>
-{% endblock%}
+<main class="main">
+    <div class="patient_info">
+        <p class="patient_title bold-text-weight">
+            Пациент
+        </p>
+        <p class="patient_fullname">
+            {{ patient.patient_last_name}} {{ patient.patient_first_name }} 
+            {% if patient.patient_second_name %}
+              {{ patient.patient_second_name }}
+            {% endif %}
+        </p>
+        <p class="patient_age">
+            Возраст: {{ patient.patient_age }}
+        </p>
+        <a href="#" class="patient_button patient_change">Изменить</a>
+    </div>
+
+    <div class="patient_visit">
+        <p class="visit_title bold-text-weight">
+            Ближайшие посещения
+        </p>
+        {% for visit_item in visit %}
+            <p class="chart_day">
+                {{ visit_item }}
+            </p>
+        {% endfor %}
+        <a href="#" class="patient_button patient_visit_change">Изменить</a>
+    </div>
+
+    <div class="patient_medical_history">
+        <p class="medical_history_title bold-text-weight">
+            История болезней
+        </p>
+        {% for medical_history_item in medical_history %}
+            <p class="medical_history_info">
+                {{ medical_history }}
+            </p>
+        {% endfor %}
+        <a href="#" class="patient_button patient_medical_history_change">Изменить</a>
+    </div>
+</main>
+
+{% endblock %}

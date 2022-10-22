@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,900;1,400&display=swap');
+
+$oceanic-blue: #6697CA;
+$dark-blue: #45719E;
+
+$font-nunito: 'Nunito', sans-serif; 
+
+.header {
+    font-family: $font-nunito;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    padding-top: 50px;
+
+    .header_logo {
+        color: $oceanic-blue;
+        font-size: 30px;
+        text-decoration: none;
+        font-weight: 900;
+    }
+
+    .header_links {
+        display: flex;
+
+        .link {
+            text-decoration: none;
+            color: $oceanic-blue;
+            font-weight: 400;
+            font-style: italic;
+            font-size: 25px;
+            padding-left: 30px;
+        }
+    }
+}

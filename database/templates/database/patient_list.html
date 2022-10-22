@@ -1,12 +1,22 @@
 {% extends 'database/base.html' %}
+{% load static %}
+
+{% block static_link %}
+    <link rel="stylesheet" href="{% static 'database/css/patients_list.css' %}">
+{% endblock %}
 
 {% block content %}
-
-{% for patient in patients %}
-{{ patient.patient_first_name }}
-{{ patient.patient_last_name }}
-<a href="{{ patient.get_absolute_url }}">Подробнее</a>
-<br>
-{% endfor %}
-
+<section class="patients">
+    {% for patient in patients %}
+    <div class="patient_name">
+        <a href="{{ patient.get_absolute_url }}" class="patient">
+            {{ patient.patient_first_name }}
+            {{ patient.patient_last_name }}
+            {% if patient.patient_second_name %}
+                {{ patient.patient_second_name }}
+            {% endif %}
+        </a>
+    </div>
+    {% endfor %}
+</section>
 {% endblock%}
