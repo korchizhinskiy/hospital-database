@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from database.utils import GetDoctorDataMixin, GetPatientDataMixin
 
-from .models import Doctor, Patient
+from .models import Doctor, Patient, Visit
 
 
 def home_page(request):
@@ -35,7 +35,8 @@ class DoctorDetailView(GetDoctorDataMixin, DetailView):
     def get_queryset(self):
         return Doctor.objects.filter(
                 pk=self.kwargs['pk']
-                ).select_related('doctor_specialization_id', 'doctor_department_id')
+                ).select_related('doctor_specialization_id', 
+                                 'doctor_department_id')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -72,5 +73,17 @@ class PatientDetailView(GetPatientDataMixin, DetailView):
         medical_history = self.get_patient_medical_history(self.kwargs['pk'])
         visit = self.get_doctor_visit_by_patient(self.kwargs['pk'])
         return context | medical_history | visit
+
+class VisitDetailView(DetailView):
+    """Visit Detail View"""
+    model = Visit
+    context_object_name = 'visit'
+    template_name = 'database/visit.html'
+    
+    def get_queryset(self):
+        return Visit.objects.filter(visit_id=self.kwargs['pk']
+                                    ).select_related('visit_patient_id',
+                                                     'visit_doctor_id')
+
 
 
