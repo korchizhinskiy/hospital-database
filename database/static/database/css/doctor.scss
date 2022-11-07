@@ -1,10 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
-
 $oceanic-blue: #6697CA;
 $dark-blue: #45719E;
 
 $font-nunito: 'Nunito', sans-serif;
-
 
 main {
     display: flex;
@@ -50,6 +47,13 @@ main {
 
 .doctor_info > p, .doctor_chart > p, .doctor_visit > p {
     margin-top: 15px;
+    
+}
+
+.visit_info {
+    display: block;
+    color: $oceanic-blue;
+    text-decoration: none;
 }
 
 .doctor_button {
@@ -60,5 +64,5 @@ main {
     padding: 5px 15px;
     font-size: 15px;
     border-radius: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
