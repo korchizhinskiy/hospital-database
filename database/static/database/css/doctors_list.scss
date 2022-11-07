@@ -1,19 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
-
-$oceanic-blue: #6697CA;
-$dark-blue: #45719E;
-
-$font-nunito: 'Nunito', sans-serif;
-
-
 .doctors {
     margin-top: 100px;
     .doctor {
         display: inline-block;
-        font-family: $font-nunito;
-        color: $oceanic-blue;
-        font-size: 25px;
-        text-decoration: none;
         margin-bottom: 15px;
     }
 }
