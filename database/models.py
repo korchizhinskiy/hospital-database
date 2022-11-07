@@ -88,7 +88,9 @@ class Doctor(models.Model):
 
     class Meta:
         db_table = 'doctor'
-        unique_together = ['doctor_first_name', 'doctor_last_name', 'doctor_second_name']
+        unique_together = ['doctor_first_name', 
+                           'doctor_last_name', 
+                           'doctor_second_name']
         verbose_name = 'Врач'
         verbose_name_plural = 'Врачи'
 
@@ -168,6 +170,9 @@ class Visit(models.Model):
 
     def __str__(self):
         return f"Посещение №{self.visit_id}"
+
+    def get_absolute_url(self):
+        return reverse('visit', kwargs={'pk': self.pk})
 
     class Meta:
         db_table = 'visit'
