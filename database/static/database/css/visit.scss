@@ -1,0 +1,26 @@
+$oceanic-blue: #6697CA;
+$font-nunito: 'Nunito', sans-serif;
+
+.main {
+  padding-top: 100px;
+}
+.visit_datetime {
+  color: $oceanic-blue;
+  font-size: 15px;
+  padding-left: 15px;
+}
+
+.visit_button {
+  padding-left: 15px;
+}
+.visit_button {
+    font-family: Nunito;
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    background-color: $oceanic-blue;
+    padding: 5px 15px;
+    font-size: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
