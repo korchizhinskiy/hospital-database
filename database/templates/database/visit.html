@@ -1,0 +1,24 @@
+{% extends 'database/base.html' %}
+{% load static %}
+
+{% block static_link %}
+<link rel="stylesheet" href="{% static 'database/css/commons/hospital_common_styles.css' %}">
+<link rel="stylesheet" href="{% static 'database/css/visit.css' %}">
+{% endblock %}
+
+{% block content %}
+  <main class="main">
+      <div class="visit_info">
+        <a href="{{ visit.visit_patient_id.get_absolute_url }}" class="patient_fullname _text-header-link">
+            {{ visit.visit_patient_id.patient_last_name}} {{ visit.visit_patient_id.patient_first_name }} 
+            {% if visit.visit_patient_id.patient_second_name %}
+              {{ visit.visit_patient_id.patient_second_name }}
+            {% endif %}
+        </a>
+        <p class="visit_datetime">
+          {{ visit.visit_datetime | date:"d.m.Y H:i"  }}
+        </p>
+        <a href="#" class="visit_button visit_change">Изменить</a>
+      </div>
+  </main>
+{% endblock %}
