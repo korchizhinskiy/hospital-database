@@ -3,13 +3,14 @@
 
 {% block static_link %}
 <link rel="stylesheet" href="{% static 'database/css/doctors_list.css' %}">
+<link rel="stylesheet" href="{% static 'database/css/commons/hospital_common_styles.css' %}">
 {% endblock %}
 
 {% block content %}
    <section class="doctors">
       {% for doctor in doctors %} 
       <div class="patient_name">
-         <a href="{{ doctor.get_absolute_url }}" class="doctor">
+         <a href="{{ doctor.get_absolute_url }}" class="doctor _text-header-link">
          Врач-{{ doctor.doctor_specialization_id.specialization_name | lower }} | 
          {{ doctor.doctor_last_name }}
          {{ doctor.doctor_first_name }}
