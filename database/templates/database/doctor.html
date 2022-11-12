@@ -1,6 +1,5 @@
 {% extends 'database/base.html' %}
 {% load static %}
-
 {% block static_link %}
 <link rel="stylesheet" href="{% static 'database/css/doctor.css' %}">
 {% endblock %}
@@ -23,6 +22,7 @@
         <p class="doctor_experience">
             Опыт работы: {{ doctor.doctor_experience }}
         </p>
+
         <a href="#" class="doctor_button doctor_change">Изменить</a>
     </div>
 
@@ -43,12 +43,13 @@
             Ближайшие посещения
         </p>
         {% for visit_item in visit %}
-            <p class="visit_info">
-                {{ visit_item }}
-            </p>
+                <a href="{{ visit_item.get_absolute_url }}" class="visit_info">
+                    {{ visit_item }}
+                </a>
         {% endfor %}
         <a href="#" class="doctor_button doctor_chart_change">Изменить</a>
     </div>
 </main>
 
 {% endblock %}
+
