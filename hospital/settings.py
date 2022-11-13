@@ -32,7 +32,8 @@ INSTALLED_APPS = [
 
     'debug_toolbar',
 
-    'database.apps.DatabaseConfig'
+    'database.apps.DatabaseConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
