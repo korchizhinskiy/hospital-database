@@ -4,7 +4,9 @@ from .views import DoctorDetailView, \
                    PatientDetailView, \
                    PatientsListView, \
                    VisitDetailView, \
-                   home_page
+                   home_page, \
+                   visit_page
+
 
 urlpatterns = [
         path('', home_page, name='home'),
@@ -13,5 +15,6 @@ urlpatterns = [
         path('patient/<int:pk>', PatientDetailView.as_view(), name='patient'),
         path('doctor/<int:pk>', DoctorDetailView.as_view(), name='doctor'),
         path('visit/<int:pk>', VisitDetailView.as_view(), name='visit'),
+        path('get_visit/', visit_page, name='get_visit'),
 
 ]
