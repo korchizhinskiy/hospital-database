@@ -1,14 +1,28 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from database.forms import VisitForm
 
-from database.utils import GetDoctorDataMixin, GetPatientDataMixin
+from database.mixins import GetDoctorDataMixin, GetPatientDataMixin
 
 from .models import Doctor, Patient, Visit
 
 
 def home_page(request):
     return render(request, 'database/main_page.html')
+
+def visit_page(request):
+    if request.method == "POST":
+        form = VisitForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect(home_page)
+    else:
+        form = VisitForm()
+
+    return render(request, "database/get_visit.html", {'form': form})
+
 
 class DoctorsListView(ListView):
     """Doctor List View"""
