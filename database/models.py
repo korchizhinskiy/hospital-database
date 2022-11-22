@@ -10,6 +10,7 @@ class Department(models.Model):
     def __str__(self):
         return f"{self.department_name.capitalize()}"
 
+
     class Meta:
         db_table = 'department'
         verbose_name = 'Отделение'
@@ -25,6 +26,7 @@ class Specialization(models.Model):
     def __str__(self):
         return f"{self.specialization_name.capitalize()}"
 
+
     class Meta:
         db_table = 'specialization'
         verbose_name = 'Специализация'
@@ -38,6 +40,7 @@ class Day(models.Model):
 
     def __str__(self):
         return f"{self.day_name}"
+
 
     class Meta:
         db_table = 'day'
@@ -57,6 +60,7 @@ class Chart(models.Model):
 
     def __str__(self):
         return f"График работы №{self.chart_id}"
+
 
     class Meta:
         db_table = 'chart'
@@ -86,6 +90,7 @@ class Doctor(models.Model):
     def get_absolute_url(self):
         return reverse('doctor', kwargs={'pk': self.pk})
 
+
     class Meta:
         db_table = 'doctor'
         unique_together = ['doctor_first_name', 
@@ -104,6 +109,7 @@ class Desease(models.Model):
 
     def __str__(self):
         return f"{self.desease_name}"
+
 
     class Meta:
         db_table = 'desease'
@@ -126,6 +132,7 @@ class MedicalHistory(models.Model):
     def __str__(self):
         return f"Запись №{self.medical_history_id}"
 
+
     class Meta:
         db_table = 'medical_history'
         verbose_name = 'История болезней'
@@ -147,6 +154,7 @@ class Patient(models.Model):
 
     def get_absolute_url(self):
         return reverse('patient', kwargs={'pk': self.pk})
+
 
     class Meta:
         db_table = 'patient'
@@ -174,7 +182,9 @@ class Visit(models.Model):
     def get_absolute_url(self):
         return reverse('visit', kwargs={'pk': self.pk})
 
+
     class Meta:
         db_table = 'visit'
         verbose_name = 'Посещение'
         verbose_name_plural = 'Посещения'
+        
