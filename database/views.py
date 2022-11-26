@@ -5,9 +5,12 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from database.models import Department, \
                             Doctor, \
-                            Patient, Specialization, Visit
+                            Patient, \
+                            Specialization, \
+                            Visit
 from database.serializers import DoctorSerializer, \
-                                 PatientSerializer, VisitSerializer
+                                 PatientSerializer, \
+                                 VisitSerializer
 
 
 
