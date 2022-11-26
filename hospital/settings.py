@@ -143,7 +143,7 @@ LOGGING = {
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = 'Asia/Krasnoyarsk'
 
 USE_I18N = True
 
